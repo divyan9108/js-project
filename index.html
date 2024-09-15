@@ -4,33 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+      body{
+        background-color: bisque;
+      }
+      #counter , h1{
+        margin-top: 80px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction:  row;
+        gap:6px
+      
+      }
+      #inicount{
+        font-weight: bolder;
+        color: blue;
+        font-size: 60px;
+      }
+      .text{
+        font-size: 20px;
+        color: blueviolet;
+        font-family: monospace;
+      }
+    </style>
 </head>
 <body>
     <h1>Counter App</h1>
+    <h1 id="inicount">0</h1>
     <div id="counter">
-  <h1 id="inicount">0</h1>
+ 
     </div>
     <script>
         let counter=document.getElementById('counter')
         let inicount=document.getElementById('inicount')
+
         let count=0
+        function updateButtonState(decrt) {
+            decrt.disabled = count === 0;
+        }
+
         function rendercounter(){
-          
+           
            let incrt=document.createElement('button')
            incrt.innerText='Increment'
+           incrt.classList.add('text')
            incrt.addEventListener('click',()=>{
             count++
             inicount.innerText=count
+            updateButtonState(decrt)
+            updateButtonState(reset)
            })
              let decrt=document.createElement('button')
              decrt.innerText='Decrement'
+             decrt.classList.add('text')
+            if(count === 0){
+              decrt.disabled
+            }
              decrt.addEventListener('click',()=>{
                 count--
                 inicount.innerText=count
+                updateButtonState(decrt)
+                updateButtonState(reset)
              })
+             const reset=document.createElement('button')
+             reset.innerText='Reset'
+             reset.classList.add('text')
+             reset.addEventListener('click',()=>{
+              count=0
+              inicount.innerText=count
+              updateButtonState(decrt)
+              updateButtonState(reset)
+             })
+             counter.appendChild(reset)
              counter.appendChild(decrt)
-           counter.appendChild(incrt)
-           
+             counter.appendChild(incrt)
+             updateButtonState(decrt)
+             updateButtonState(reset)
         }
         rendercounter()
     </script>
