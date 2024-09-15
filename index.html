@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Counter App</h1>
+    <div id="counter">
+  <h1 id="inicount">0</h1>
+    </div>
+    <script>
+        let counter=document.getElementById('counter')
+        let inicount=document.getElementById('inicount')
+        let count=0
+        function rendercounter(){
+          
+           let incrt=document.createElement('button')
+           incrt.innerText='Increment'
+           incrt.addEventListener('click',()=>{
+            count++
+            inicount.innerText=count
+           })
+             let decrt=document.createElement('button')
+             decrt.innerText='Decrement'
+             decrt.addEventListener('click',()=>{
+                count--
+                inicount.innerText=count
+             })
+             counter.appendChild(decrt)
+           counter.appendChild(incrt)
+           
+        }
+        rendercounter()
+    </script>
+</body>
+</html>
