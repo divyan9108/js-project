@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div>
+    <h1>User Form</h1>
+    <div id="form">
+
+    </div>
+  </div>
+  <script>
+   let form=document.getElementById('form')
+   let userDetails=[]
+   let input=document.createElement('input')
+    let button=document.createElement('button')
+    let num=document.createElement('input')
+    let Edit=null
+   function renderUser(){
+   
+    num.type='number'
+    button.innerText='Submit'
+    button.addEventListener('click',(e)=>{
+      e.preventDefault()
+      if (input.value && num.value) {
+        let data={name:input.value,id:num.value}
+      if(!Edit){
+        userDetails.push(data)
+      }else{
+        const index=userDetails.findIndex(c=>c.id === Edit.id)
+        if(index !== -1){
+            userDetails[index]=data
+            Edit=null
+        }
+      }
+        input.value=''
+      num.value=0
+        renderUserDetails()
+      }
+    })
+    form.append(input, num,button)
+   }
+   function renderUserDetails(){
+    let div=document.createElement('div')
+    div.innerHTML=''
+   
+    if(userDetails.length>0){
+        
+      userDetails.forEach((name, idx)=>{
+        const p=document.createElement('p')
+        p.innerText=`Name:${name.name}-Number:${name.id}`
+        p.addEventListener('click',()=>{
+            Edit=name
+            input.value=name.name
+            num.value=name.id
+            
+        })
+        div.appendChild(p)
+      })
+
+    }
+   
+
+    form.querySelectorAll('div').forEach(d=>d.remove())
+    form.appendChild(div)
+   }
+  
+  renderUser()
+  </script>
+</body>
+</html>
