@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <h1>Carousel!!</h1>
+      <div id="images-container"></div>
+    </div>
+    <script>
+      let images = [
+        "https://upload.wikimedia.org/wikipedia/commons/b/b6/Image_created_with_a_mobile_phone.png",
+        "https://letsenhance.io/static/8f5e523ee6b2479e26ecc91b9c25261e/1015f/MainAfter.jpg",
+        "https://fps.cdnpk.net/images/home/subhome-ai.webp?w=649&h=649",
+        "https://img.freepik.com/free-photo/colorful-design-with-spiral-design_188544-9588.jpg",
+        "https://images.pexels.com/photos/674010/pexels-photo-674010.jpeg?cs=srgb&dl=pexels-anjana-c-169994-674010.jpg&fm=jpg",
+      ];
+      let imagesContainer = document.getElementById("images-container");
+      let indexValue = 0;
+
+        let image = document.createElement("img");
+        let nextBtn = document.createElement("button");
+        let prevBtn = document.createElement("button");
+
+        nextBtn.innerText = "Next";
+        prevBtn.innerText = "Prev";
+        image.style.width = "500px";
+        image.style.height = "500px";
+
+           imagesContainer.appendChild(prevBtn);
+            imagesContainer.appendChild(image);
+            imagesContainer.appendChild(nextBtn);
+          
+        function renderImages() {
+        image.src = images[indexValue];
+        }
+        nextBtn.addEventListener("click", () => {
+          indexValue=(indexValue+1)%images.length
+          renderImages()
+        });
+        prevBtn.addEventListener("click", () => {
+          indexValue=(indexValue-1+images.length)%images.length
+          renderImages()
+        });
+     
+      const handlernext = (idx) => {
+        indexValue = idx + 1;
+        renderImages();
+      };
+      const handlerPrev = (idx) => {
+        indexValue = idx - 1;
+        renderImages();
+      };
+      renderImages();
+    </script>
+  </body>
+</html>
